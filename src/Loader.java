@@ -17,8 +17,8 @@ public class Loader {
         int temporaryAnswer;
         while (true) {
             System.out.println("Веедите пожалуйста число, оно должно быть целым и от 0 до 9");
-            temporaryAnswer = reader.read();
-            if ( temporaryAnswer >= 0 &&  temporaryAnswer < 100) {
+            temporaryAnswer = Integer.parseInt(reader.readLine());
+            if ( temporaryAnswer >= 0 &&  temporaryAnswer < 10) {
                 answer = temporaryAnswer;
                 break;
             } else {
