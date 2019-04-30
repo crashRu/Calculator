@@ -14,11 +14,11 @@ public class Loader {
 
     private static int getInt() throws IOException {
         int answer ;
-        int temporaryAnswer;
         while (true) {
-            System.out.println("Веедите пожалуйста число, оно должно быть целым и от 0 до 9");
-            temporaryAnswer = Integer.parseInt(reader.readLine());
-            if ( temporaryAnswer >= 0 &&  temporaryAnswer < 10) {
+            System.out.println("Веедите пожалуйста число, оно должно быть целым и от 1 до 10");
+            String s = reader.readLine();
+            int temporaryAnswer = NumberConverter.NumberConverter(s);
+            if ( temporaryAnswer > 0 &&  temporaryAnswer <= 10) {
                 answer = temporaryAnswer;
                 break;
             } else {
@@ -46,23 +46,27 @@ public class Loader {
 
     private static int Decision(int a, int b, String sign) {
         int result = 0;
-
-        switch (sign) {
-            case "+":
-                result = a + b;
-                break;
-            case "-":
-                result = a - b;
-                break;
-            case "*":
-                result = a * b;
-                break;
-            case "/":
-                result = a / b;
-                break;
-            default:
-                System.out.println("Ошибка в вычислении");
-                break;
+        if(NumberConverter.count == 1) {
+            System.out.println("Можно производить вычисления только над орабскими или римскими цифрами");
+            System.exit(0);
+        }else {
+            switch (sign) {
+                case "+":
+                    result = a + b;
+                    break;
+                case "-":
+                    result = a - b;
+                    break;
+                case "*":
+                    result = a * b;
+                    break;
+                case "/":
+                    result = a / b;
+                    break;
+                default:
+                    System.out.println("Ошибка в вычислении");
+                    break;
+            }
         }
         return  result;
     }
