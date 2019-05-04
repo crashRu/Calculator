@@ -4,44 +4,27 @@ import java.io.InputStreamReader;
 
 public class Loader {
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+   public static String expression;
+    public static String sign;
+    public static  String temporarySign;
     public static void main(String[] args) throws IOException {
-        int a = getInt();
-        String sign = getSign();
-        int b = getInt();
-        System.out.println("ваш ответ " + Decision(a,b,sign) );
-    }
+        System.out.println("Введите ваш привмер");
+        expression = reader.readLine().trim();
+        int numberOne = NumberConverter.NumberConverter( expression.substring(0, expression.indexOf(' ')).trim());
+        int numberTwo = NumberConverter.NumberConverter(expression.substring(expression.lastIndexOf(' ')).trim());
+        temporarySign = expression.substring(expression.indexOf(' '), expression.lastIndexOf(' ')).trim();
+        if ( numberOne > 0 &&  numberOne <= 10 && numberTwo > 0 &&  numberTwo <= 10 ) {
 
-    private static int getInt() throws IOException {
-        int answer ;
-        while (true) {
-            System.out.println("Веедите пожалуйста число, оно должно быть целым и от 1 до 10");
-            String s = reader.readLine();
-            int temporaryAnswer = NumberConverter.NumberConverter(s);
-            if ( temporaryAnswer > 0 &&  temporaryAnswer <= 10) {
-                answer = temporaryAnswer;
-                break;
-            } else {
-                System.out.println("Вы допустили ошибку, пожалуйста введите число верно");
-            }
+        } else {
+            System.out.println("Вы допустили ошибку, пожалуйста введите число верно");
         }
-        return answer;
-    }
+        if (temporarySign.equals("+") || temporarySign.equals("-") || temporarySign.equals("*") || temporarySign.equals("/")) {
+            sign = temporarySign;
+        } else {
+            System.out.println("Вы ввели неверный знак");
 
-    public static String getSign() throws IOException {
-        String sign;
-        String temporarySign;
-        while (true) {
-            System.out.println("Введите знак:");
-            temporarySign = reader.readLine().trim();
-            if (temporarySign.equals("+") || temporarySign.equals("-") || temporarySign.equals("*") || temporarySign.equals("/")) {
-                sign = temporarySign;
-                break;
-            } else {
-                System.out.println("Вы ввели неверный знак");
-            }
         }
-        return sign;
+        System.out.println(Decision(numberOne,numberTwo, sign ));
     }
 
     private static int Decision(int a, int b, String sign) {
@@ -71,4 +54,3 @@ public class Loader {
         return  result;
     }
 }
-
